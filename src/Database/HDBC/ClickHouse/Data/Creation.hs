@@ -26,6 +26,7 @@ createColumn name typ | isPrefixOf "Array(" typ && isSuffixOf ")" typ =
   ArrayColumn { columnName = name, itemType = getItemType name (length "Array(") typ }
 createColumn name typ | isPrefixOf "Nullable(" typ && isSuffixOf ")" typ =
   NullableColumn { columnName = name, itemType = getItemType name (length "Nullable(") typ }
+createColumn name typ = error $ "Unsupported name '" ++ name ++ "' and typ '" ++ typ ++ "'"
 
 getFixedStringSize :: String -> Int
 getFixedStringSize typ =
